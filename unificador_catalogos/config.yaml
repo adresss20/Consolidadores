@@ -1,0 +1,96 @@
+# ==============================================================================
+# Configuración de Unificador de Catálogos
+# ==============================================================================
+# Cada proveedor tiene un nombre, el nombre exacto de su hoja en el Excel,
+# y el mapeo de sus columnas a los campos canónicos.
+#
+# Campos canónicos:
+#   sku_col        → columna que contiene el EAN / código de barras (llave de match)
+#   price_col      → precio final que se usará en el consolidado
+#   desc_col       → descripción del producto
+#   lab_col        → laboratorio / fabricante
+#   familia_col    → familia o categoría del producto
+#   generico_col   → si es genérico (0/1)
+#   sustancia_col  → sustancia activa
+#   presentacion_col → presentación (tabletas, sobres, ml, etc.)
+#
+# Valores null = la columna no existe en ese proveedor; se dejará vacío.
+# ==============================================================================
+
+# Orden de prioridad para llenar campos informativos (DESCRIPCION, LABORATORIO, etc.)
+# cuando varios proveedores tienen datos para el mismo SKU.
+# El primero en la lista tiene mayor prioridad.
+info_priority:
+  - Adsa
+  - Nadro
+  - Farmater
+  - Levic
+  - Fanasa
+  - FarmaMayoreo
+
+suppliers:
+  Adsa:
+    sheet: Adsa
+    sku_col: EAN
+    price_col: P.Final
+    desc_col: "Descripción"
+    lab_col: LABORATORIO
+    familia_col: FAMILIA
+    generico_col: GENERICO
+    sustancia_col: null
+    presentacion_col: null
+
+  FarmaMayoreo:
+    sheet: FarmaMayoreo
+    sku_col: CODIGO
+    price_col: PRECIO          # El loader hace strip automático de espacios en headers
+    desc_col: ARTICULO
+    lab_col: null
+    familia_col: null
+    generico_col: null
+    sustancia_col: null
+    presentacion_col: null
+
+  Levic:
+    sheet: Levic
+    sku_col: "Código Barras"
+    price_col: "Precio Final"
+    desc_col: Nombre
+    lab_col: Laboratorio
+    familia_col: null
+    generico_col: null
+    sustancia_col: Sustancia
+    presentacion_col: "Presentación"
+
+  Nadro:
+    sheet: Nadro
+    sku_col: EAN
+    price_col: "PRECIO FARMACIA"
+    desc_col: "DESCRIPCIÓN"
+    lab_col: LABORATORIO
+    familia_col: FAMILIA
+    generico_col: null
+    sustancia_col: null
+    presentacion_col: null
+
+  Farmater:
+    sheet: Farmater
+    sku_col: CODIGO
+    price_col: "PRECIO CON IVA Y OFERTAS APLICADAS"
+    desc_col: PRODUCTOS
+    lab_col: LABORATORIO
+    familia_col: CATEGORIA
+    generico_col: null
+    sustancia_col: "SUSTANCIA ACTIVA"
+    presentacion_col: null
+
+  Fanasa:
+    sheet: Fanasa
+    sku_col: "Código de Barras"
+    price_col: "Precio Final"
+    desc_col: "Descripcion del articulo"
+    lab_col: null
+    familia_col: null
+    generico_col: null
+    sustancia_col: null
+    presentacion_col: null

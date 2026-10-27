@@ -1,0 +1,3 @@
+Abrir Cmd y pegar:  python -m pip install -r requirements.txt   para instalar dependencias
+
+correr el main:   python main.py
